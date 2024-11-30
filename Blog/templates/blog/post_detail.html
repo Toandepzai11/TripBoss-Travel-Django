@@ -1,0 +1,28 @@
+{% extends "pages/base.html" %}
+{% block title %}Post {{ post.id }} Detail{% endblock %}
+{% load static %}
+{% block content %}
+    <!-- header section -->
+    <header class="flex header-sm">
+        <div class="container">
+            <div class="header-title">
+                <h1>Blog {{ post.id }}'s Detail</h1>
+                <h2>- {{ post.title }} -</h2>
+            </div>
+        </div>
+    </header>
+    <!-- end header section -->
+    <div class="container">
+        <div class="title-wrap" style="padding-bottom: 1px">
+            <h3 class="lg-title">the title: "{{ post.title }}"</h3>
+        </div>
+        <div class="image-and-content-cover">
+            <div class="header-title">
+                <p style="font-size: 1.25rem">{{ post.body }}</p>
+            </div>
+        </div>
+        <div class="title-wrap">
+            <h2 class="sm-title">Published on: {{ post.date }}</h2>
+        </div>
+    </div>
+{% endblock %}

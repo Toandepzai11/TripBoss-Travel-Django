@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %}{% endblock title %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- load static files-->
+        {% load static %}
+        <!-- font awesome cdn -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- fonts -->
+        <link rel = "stylesheet" href = "{% static 'font/fonts.css' %}">
+        <!-- normalize css -->
+        <link rel = "stylesheet" href = "{% static 'css/normalize.css' %}">
+        <!-- custom css -->
+        <link rel = "stylesheet" href = "{% static 'css/utility.css' %}">
+        <link rel = "stylesheet" href = "{% static 'css/style.css' %}">
+        <link rel = "stylesheet" href = "{% static 'css/responsive.css' %}">
+        {% block extra_css %}{% endblock %}
+        <link rel="icon" href="{% static 'images/image.png' %}" type="image">
+    </head>
+    <body>
+        <!-- navbar  -->
+        <nav class = "navbar">
+            <div class = "container flex">
+                <a href = {% url "home" %} class = "site-brand">
+                    Trip<span>Boss</span>
+                </a>
+
+                <button type = "button" id = "navbar-show-btn" class = "flex">
+                    <i class = "fas fa-bars"></i>
+                </button>
+                <div id = "navbar-collapse">
+                    <button type = "button" id = "navbar-close-btn" class = "flex">
+                        <i class = "fas fa-times"></i>
+                    </button>
+                    <ul class = "navbar-nav">
+                        <li class = "nav-item">
+                            <a href = {% url "home" %} class = "nav-link">Home</a>
+                        </li>
+                        <li class = "nav-item">
+                            <a href = {% url "gallery" %} class = "nav-link">Gallery</a>
+                        </li>
+                        <li class = "nav-item">
+                            <a href = {% url "blog" %} class = "nav-link">Blog</a>
+                        </li>
+                        <li class = "nav-item">
+                            <a href = {% url "about" %} class = "nav-link">About</a>
+                        </li>
+                        <li class = "nav-item">
+                            <a href = {% url "contact" %} class = "nav-link">Contact</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <span class = "nav-link" style="padding-right: 1.75rem">Hello, {{ user.username }}</span>
+                                <a href="{% url 'logout' %}" class = "nav-link">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a style="padding-right: 1.5rem" href="{% url 'signup' %}" class = "nav-link">Sign up</a>
+                                <a href="{% url 'login' %}" class = "nav-link">Login</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- end of navbar  -->
+
+        {% block content %}
+        {% comment %} place where others page will be take part in {% endcomment %}
+        {% endblock content %}
+
+        <!-- footer -->
+        <footer class = "py-4">
+            <div class = "container footer-row">
+                <div class = "footer-item">
+                    <a href = {% url "home" %} class = "site-brand">
+                        Trip<span>Boss</span>
+                    </a>
+                    <p class = "text">We offer personalized travel services to help you explore the world! From destination recommendations to seamless bookings, we ensure every journey is unforgettable, tailored to your preferences and dreams. Let us be your guide to global adventures!</p>
+                </div>
+
+                <div class = "footer-item">
+                    <h2>Follow us on: </h2>
+                    <ul class = "social-links">
+                        <li>
+                            <a href = "#">
+                                <i class = "fab fa-facebook-f"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href = "#">
+                                <i class = "fab fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href = "#">
+                                <i class = "fab fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href = "#">
+                                <i class = "fab fa-pinterest"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href = "#">
+                                <i class = "fab fa-google-plus"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class = "footer-item">
+                    <h2>Popular Places:</h2>
+                    <ul>
+                        <li><a href = "#">Thailand</a></li>
+                        <li><a href = "#">Australia</a></li>
+                        <li><a href = "#">Maldives</a></li>
+                        <li><a href = "#">Switzerland</a></li>
+                        <li><a href = "#">Germany</a></li>
+                    </ul>
+                </div>
+
+                <div class = "subscribe-form footer-item">
+                    <h2>Subscribe for Newsletter!</h2>
+                    <form class = "flex">
+                        <input type = "email" placeholder="Enter Email" class = "form-control">
+                        <input type = "submit" class = "btn" value = "Subscribe">
+                    </form>
+                </div>
+            </div>
+        </footer>
+        <!-- end of footer -->
+
+        <!-- js -->
+        <script src = "{%static 'js/script.js' %}"></script>
+        <script>
+            // play/pause video
+            let video = document.querySelector('.video-wrapper video');
+            document.getElementById('play-btn').addEventListener('click', () => {
+                if(video.paused){
+                    video.play();
+                } else {
+                    video.pause();
+                }
+            });
+        </script>
+    </body>
+</html>

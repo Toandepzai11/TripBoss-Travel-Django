@@ -1,0 +1,73 @@
+{% extends "pages/base.html" %}
+{% load static %}
+{% block title %}
+Contact Page
+{% endblock %}
+{% block content %}
+<!-- header section -->
+<header class="flex header-sm">
+    <div class="container">
+        <div class="header-title">
+            <h1>contact</h1>
+            <p>
+                Contact us for travel assistance! Reach out via email, phone, or our form, and let’s make your next adventure unforgettable.
+            </p>
+        </div>
+
+    </div>
+</header>
+<!-- end header section -->
+
+<!-- start contact section -->
+<section id="contact" class="py-4">
+    <div class="container">
+        <div class="title-wrap">
+            <span class="sm-title">get in touch with us</span>
+            <h2 class="lg-tilte">countact us</h2>
+        </div>
+        <div class="contact-row">
+            <div class="contact-left">
+                <form class="contact-form">
+                    <input type="text" class="form-control" placeholder="Your name">
+                    <input type="email" class="form-control" placeholder="Your Email">
+                    <textarea placeholder="Your message" row="4" class="form-control"
+                        style="resize: none;"></textarea>
+                    <input type="submit" class="btn" value="send message">
+                </form>
+            </div>
+            <div class="contact-right my-2">
+                <div class="contact-item">
+                    <span class="contact-icon flex">
+                        <i class="fa fa-phone-alt"></i>
+                    </span>
+                    <div>
+                        <span>phone</span>
+                        <p class="text">+20-123-456-789</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon flex">
+                        <i class="fa fa-map-marked-alt"></i>
+                    </span>
+                    <div>
+                        <span>Address</span>
+                        <p class="text">102 East 22nd Street,NY</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon flex">
+                        <i class="fa fa-envelope"></i>
+                    </span>
+                    <div>
+                        <span>Message</span>
+                        <p class="text">info@gmail.com</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end contact section -->
+
+{% endblock content %}

@@ -1,0 +1,129 @@
+{% extends "pages/base.html" %}
+{% load static %}
+{% block title %}
+Gallery Page
+{% endblock %}
+{% block content %}
+<!-- header -->
+<header class = "flex header-sm">
+    <div class = "container">
+        <div class = "header-title">
+            <h1>Gallery</h1>
+            <p>Discover stunning travel moments, breathtaking destinations, and vibrant cultures in our gallery. Get inspired for your next adventure!</p>
+        </div>
+    </div>
+</header>
+<!-- header -->
+
+<!-- gallery section -->
+<div id = "gallery" class = "py-4">
+    <div class = "container">
+        <div class = "gallery-row">
+            {% for place_window in gallery_window %}
+            <div class = "gallery-item shadow">
+                <img src ="{% static place_window.image %}" alt = "gallery img">
+                <span class = "zoom-icon">
+                    <i class = "fas fa-search-plus"></i>
+                </span>
+            </div>        
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- end of gallery section -->
+
+<!-- img modal -->
+<div id = "img-modal-box">
+    <div id = "img-modal">
+        <button type = "button" id = "modal-close-btn" class = "flex">
+            <i class = "fas fa-times"></i>
+        </button>
+        <button type = "button" id = "prev-btn" class = "flex">
+            <i class = "fas fa-chevron-left"></i>
+        </button>
+        <button type = "button" id = "next-btn" class = "flex">
+            <i class = "fas fa-chevron-right"></i>
+        </button>
+        <img src = {%static "images/gallery-1.jpg"%}>
+    </div>
+</div>
+<!-- end of img modal -->
+
+<!-- popular places section -->
+<section id = "popular" class = "py-4">
+    <div class = "title-wrap">
+        <span class = "sm-title">know about some coo destination</span>
+        <h2 class = "lg-title">Popular Places</h2>
+    </div>
+
+    <div class = "popular-row">
+        {% for place in gallery_places %}
+        <div class="popular-item shadow">
+            <img src="{% static place.image %}" alt="{{ place.name }}">
+            <div>
+                <span>{{ place.name }}</span>
+                <ul class="rating flex">
+                    {% for i in "12345" %}
+                        <li><i class="fas fa-star{% if place.rating < forloop.counter %}-half-alt{% endif %}"></i></li>
+                    {% endfor %}
+                    <li>&nbsp;{{ place.reviews }} reviews</li>
+                </ul>
+                <p class="text">{{ place.des }}</p>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+<!-- end of popular places section -->
+
+
+
+<!-- js -->
+<script src = {% static "js/script.js"%}></script>
+<script>
+    // image modal
+    const allGalleryItem = document.querySelectorAll('.gallery-item');
+    const imgModalDiv = document.getElementById('img-modal-box');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const prevBtn = document.getElementById('prev-btn');
+    let imgIndex = 0;
+
+    allGalleryItem.forEach((galleryItem) => {
+        galleryItem.addEventListener('click', () => {
+            imgModalDiv.style.display = "block";
+            let imgSrc = galleryItem.querySelector('img').src;
+            imgIndex = parseInt(imgSrc.split("-")[1].substring(0, 1));
+            showImageContent(imgIndex);
+        })
+    });
+
+    // next click
+    nextBtn.addEventListener('click', () => {
+        imgIndex++;
+        if(imgIndex > allGalleryItem.length){
+            imgIndex = 1;
+        }
+        showImageContent(imgIndex);
+    });
+
+    // previous click
+    prevBtn.addEventListener('click', () => {
+        imgIndex--;
+        if(imgIndex <= 0){
+            imgIndex = allGalleryItem.length;
+        }
+        showImageContent(imgIndex);
+    });
+
+    function showImageContent(index){
+        imgModalDiv.querySelector('#img-modal img').src = `images/gallery-${index}.jpg`;
+    }
+
+    modalCloseBtn.addEventListener('click', () => {
+        imgModalDiv.style.display = "none";
+    })
+</script>
+<!-- end of popular places section -->
+{% endblock %}

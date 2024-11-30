@@ -1,0 +1,249 @@
+{% extends "pages/base.html" %}
+{% load static %}
+{% block title %}
+Travel Website - Toan's Website
+{% endblock %}
+{% block content %}
+<!-- header -->
+<header class = "flex">
+    <div class = "container">
+        <div class = "header-title">
+            <h1>Leave Your Footprints</h1>
+            <p>Embark on unforgettable journeys, discover breathtaking destinations, and create lasting memories—leave your footprints wherever you go.</p>
+        </div>
+        <div class = "header-form">
+            <h2>Choose your Travel location:</h2>
+            <form class = "flex">
+                <input type = "text" class = "form-control" placeholder="Destination name">
+                <input type="date" class = "form-control" placeholder="Date">
+                <input type="number" class = "form-control" placeholder="Price ($)">
+                <input type="submit" class = "btn" value = "Search">
+            </form>
+        </div>
+    </div>
+</header>
+<!-- header -->
+
+<!-- featured section -->
+<section id = "featured" class = "py-4">
+    <div class = "container">
+        <div class = "title-wrap">
+            <span class = "sm-title">know about some places before your travel</span>
+            <h2 class = "lg-title">featured places</h2>
+        </div>
+
+        <div class = "featured-row">
+            {% comment %} NOT AUTOMATYCALLY {% endcomment %}
+            {% comment %} <div class = "featured-item my-2 shadow">
+                <img src = {%static "images/featured-reo-de-janeiro-brazil.jpg"%} alt = "featured place">
+                <div class = "featured-item-content">
+                    <span>
+                        <i class = "fas fa-map-marker-alt"></i>
+                        Reo De Janeiro, Brazil
+                    </span>
+                    <div>
+                        <p class = "text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta sed dignissimos libero soluta illum, harum amet excepturi sit?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class = "featured-item my-2 shadow">
+                <img src = {%static "images/featured-north-bondi-australia.jpg"%} alt = "featured place">
+                <div class = "featured-item-content">
+                    <span>
+                        <i class = "fas fa-map-marker-alt"></i>
+                        North Bondi, Australia
+                    </span>
+                    <div>
+                        <p class = "text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta sed dignissimos libero soluta illum, harum amet excepturi sit?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class = "featured-item my-2 shadow">
+                <img src = {%static "images/featured-berlin-germany.jpg"%} alt = "featured place">
+                <div class = "featured-item-content">
+                    <span>
+                        <i class = "fas fa-map-marker-alt"></i>
+                        Berlin, Germany
+                    </span>
+                    <div>
+                        <p class = "text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta sed dignissimos libero soluta illum, harum amet excepturi sit?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class = "featured-item my-2 shadow">
+                <img src = {%static "images/featured-khwaeng-wat-arun-thailand.jpg"%} alt = "featured place">
+                <div class = "featured-item-content">
+                    <span>
+                        <i class = "fas fa-map-marker-alt"></i>
+                        Khwaeng wat arun, thailand
+                    </span>
+                    <div>
+                        <p class = "text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta sed dignissimos libero soluta illum, harum amet excepturi sit?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class = "featured-item my-2 shadow">
+                <img src = {%static "images/featured-rome-italy.jpg"%} alt = "featured place">
+                <div class = "featured-item-content">
+                    <span>
+                        <i class = "fas fa-map-marker-alt"></i>
+                        Rome, Italy
+                    </span>
+                    <div>
+                        <p class = "text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta sed dignissimos libero soluta illum, harum amet excepturi sit?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class = "featured-item my-2 shadow">
+                <img src = {%static "images/featured-fuvahmulah-maldives.jpg"%} alt = "featured place">
+                <div class = "featured-item-content">
+                    <span>
+                        <i class = "fas fa-map-marker-alt"></i>
+                        fuvahmulah, maldives
+                    </span>
+                    <div>
+                        <p class = "text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta sed dignissimos libero soluta illum, harum amet excepturi sit?</p>
+                    </div>
+                </div>
+            </div> {% endcomment %}
+
+
+            {% comment %} AUTOMATYCALLY {% endcomment %}
+            {% for place in featured_places %}
+                <div class="featured-item my-2 shadow">
+                    <img src="{% static place.image %}" alt="featured place">
+                    <div class="featured-item-content">
+                        <span>
+                            <i class="fas fa-map-marker-alt"></i> {{ place.name }}
+                        </span>
+                        <div>
+                            <p class="text">{{ place.des }}Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta sed dignissimos libero soluta illum similique.</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% comment %} {% for place in featured_places %}
+                <div class="featured-item my-2 shadow">
+                    <img src="{{ place.image.url }}" alt="{{ place.name }}">
+                    <div class="featured-item-content">
+                        <span>
+                            <i class="fas fa-map-marker-alt"></i> {{ place.name }}
+                        </span>
+                        <div>
+                            <p class="text">{{ place.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %} {% endcomment %}
+            {% comment %}  {% endcomment %}
+        </div>
+    </div>
+</section>
+<!-- end of featured section -->
+
+<!-- services section -->
+<section id = "services" class = "py-4">
+    <div class = "container">
+        <div class = "title-wrap">
+            <span class = "sm-title">know about services that we offer</span>
+            <h2 class = "lg-title">Our services</h2>
+        </div>
+
+        <div class = "services-row">
+            <div class = "services-item">
+                <span class = "services-icon">
+                    <i class = "fas fa-hotel"></i>
+                </span>
+                <h3>Luxurious Hotel</h3>
+                <p class = "text">
+                    Experience ultimate luxury with our premium hotel service. Enjoy elegant rooms, top-tier amenities, and personalized care for an unforgettable stay. Your comfort, our priority.</p>
+                <a href = "#" class = "btn">Read more</a>
+            </div>
+
+            <div class = "services-item">
+                <span class = "services-icon">
+                    <i class = "fas fa-map-marked-alt"></i>
+                </span>
+                <h3>Trave Guide</h3>
+                <p class = "text">Our expert travel guides offer personalized tours, insider tips, and seamless itineraries to make your journey unforgettable. Explore hidden gems, local culture, and top sights with ease!</p>
+                <a href = "#" class = "btn">Read more</a>
+            </div>
+
+            <div class = "services-item">
+                <span class = "services-icon">
+                    <i class = "fas fa-money-bill"></i>
+                </span>
+                <h3>Suitable Price</h3>
+                <p class = "text">
+                    We offer exceptional travel experiences at prices that suit your budget. Enjoy high-quality services, tailored to your needs, without compromising on value or comfort. Affordable luxury awaits!</p>
+                <a href = "#" class = "btn">Read more</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end of services section -->
+
+<!-- testimonials section -->
+<section id = "testimonials" class = "py-4">
+    <div class = "container">
+        <div class = "title-wrap">
+            <span class = "sm-title">what our clients say about us</span>
+            <h2 class = "lg-title">testimonials</h2>
+        </div>
+
+        <div class = "test-row">
+            <div class = "test-item">
+                <p class = "text">Our trip to Brazil was incredible! The vibrant culture, breathtaking landscapes, and friendly locals made it unforgettable. From exploring the Amazon to relaxing on Rio’s beaches, every moment exceeded our expectations. Highly recommend this adventure!</p>
+                <div class = "test-item-info">
+                    <img src = "{%static 'images/test-1.jpg'%}" alt = "testimonial">
+                    <div>
+                        <h3>Kevin Wilson</h3>
+                        <p class = "text">Trip to Brazil</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class = "test-item">
+                <p class = "text">Our Maldives trip was a dream come true! Crystal-clear waters, luxurious resorts, and stunning coral reefs made every day feel magical. Snorkeling with turtles and watching sunsets from our villa were highlights. An unforgettable escape!</p>
+                <div class = "test-item-info">
+                    <img src = "{%static "images/test-2.jpg"%}" alt = "testimonial">
+                    <div>
+                        <h3>Ben Davis</h3>
+                        <p class = "text">Trip to Maldives</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class = "test-item">
+                <p class = "text">Our trip to Thailand was amazing! From exploring ancient temples in Chiang Mai to enjoying the vibrant street markets in Bangkok, every experience was unique. The stunning beaches of Phuket and delicious food made it an unforgettable adventure!</p>
+                <div class = "test-item-info">
+                    <img src = "{%static "images/test-3.jpg"%}" alt = "testimonial">
+                    <div>
+                        <h3>Jaura Jones</h3>
+                        <p class = "text">Trip to Thailand</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end of testimonials section -->
+
+<!-- video section -->
+<section id = "video">
+    <div class = "video-wrapper flex">
+        <video loop>
+            <source src = "{%static "videos/video-section.mp4"%}" type = "video/mp4">
+        </video>
+        <button type = "button" id = "play-btn">
+            <i class = "fas fa-play"></i>
+        </button>
+    </div>
+</section>
+<!-- end of video section -->
+{% endblock %}

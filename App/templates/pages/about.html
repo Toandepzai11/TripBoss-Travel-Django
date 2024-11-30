@@ -1,0 +1,110 @@
+{% extends "pages/base.html" %}
+{% load static %}
+{% block title %}
+About Page
+{% endblock %}
+{% block content %}
+<!-- header section -->
+<header class="flex header-sm">
+    <div class="container">
+        <div class="header-title">
+            <h1>About</h1>
+            <p>
+                Learn more about us! We’re passionate about helping you explore the world, discover new destinations, and create unforgettable memories.
+            </p>
+        </div>
+    </div>
+</header>
+<!-- end header section -->
+<!-- start about section -->
+<section id="about" class="py-4">
+    <div class="container">
+        <div class="title-wrap">
+            <span class="sm-title">things to konw about us</span>
+            <h2 class="lg-title">our story</h2>
+        </div>
+        <div class="about-row">
+            <div class="about-left my-2">
+                <img src={% static "images/about-img.jpg" %} alt="about img">
+            </div>
+            <div class="about-right">
+                <h2>15 Years of Experience</h2>
+                <p class="text">With 15 years of experience, we’ve been turning dreams into unforgettable journeys. Our passion for travel drives us to curate exceptional experiences, from hidden gems to iconic landmarks. We’ve built trust with travelers worldwide, ensuring every trip is seamless, exciting, and memorable.</p>
+                <p class="text">Our journey began with a vision to inspire exploration and connect people with the beauty of the world. Over the years, we’ve grown into a trusted travel companion, crafting personalized adventures that leave lasting impressions. Let our expertise guide your next adventure with confidence and ease.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end about section -->
+<!-- start facts section -->
+<section id="facts" class="py-4 flex">
+    <div class="container">
+        <div class="title-wrap">
+            <span class="sm-title">kowe some facts about our agency</span>
+            <h2 class="lg-title">fun facts</h2>
+        </div>
+        <div class="facts-row">
+            <div class="facts-item">
+                <span class="fas fa-camera-retro facts-icon "></span>
+                <div class="facts-info">
+                    <strong data-number="1220">0</strong>
+                    <p class="text">photo taken</p>
+                </div>
+            </div>
+            <div class="facts-item">
+                <span class="fas fa-umbrella-beach facts-icon "></span>
+                <div class="facts-info">
+                    <strong data-number="450">0</strong>
+                    <p class="text">beaches visited</p>
+                </div>
+            </div>
+            <div class="facts-item">
+                <span class="fas fa-mountain facts-icon "></span>
+                <div class="facts-info">
+                    <strong data-number="84">0</strong>
+                    <p class="text">mountains climbed</p>
+                </div>
+            </div>
+            <div class="facts-item">
+                <span class="fas fa-ship facts-icon "></span>
+                <div class="facts-info">
+                    <strong data-number="120">0</strong>
+                    <p class="text">curises organized</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end facts section -->
+<!-- javaScript links  -->
+<script src="js/main.js"></script>
+<script>
+    // countdown number
+    let countdownNumber = document.querySelectorAll(".facts-info strong");
+    function countDown(element) {
+        let countdown = element.dataset.number;
+        let counter = setInterval(() => {
+            element.textContent++;
+            if (element.textContent == countdown) {
+                clearInterval(counter);
+            }
+        }, 2000 / countdown);
+    }
+    // reach to seaction
+    let startFunction = false;
+    window.addEventListener("scroll", () => {
+        let factsSection = document.getElementById("facts");
+        let offset = factsSection.offsetTop,
+            height = factsSection.offsetHeight,
+            Top = this.scrollY;
+        if (Top >= offset && Top < offset + height) {
+            if (!startFunction) {
+                countdownNumber.forEach((num) => {
+                    countDown(num);
+                });
+            }
+            startFunction = true;
+        }
+    });
+</script>
+{% endblock content %}
