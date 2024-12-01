@@ -3,6 +3,7 @@ from .models import Post
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
 from supabase import create_client
+from io import BytesIO
 
 def post_list(request):
     posts = Post.objects.all()
@@ -26,9 +27,12 @@ def create_post(request):
             # Handle file upload to Supabase
             image = request.FILES.get('image')  # Assuming 'image' is the field name in the form
             if image:
+                # Read the file content as bytes
+                image_bytes = image.read()
+
                 # Define a path for the file in Supabase storage
                 path = f'images/{image.name}'  # Save the image with its original name
-                response = supabase.storage.from_('your-bucket-name').upload(path, image)
+                response = supabase.storage.from_('your-bucket-name').upload(path, BytesIO(image_bytes))
 
                 # Check if there was an error in the upload
                 if response.get('error'):
