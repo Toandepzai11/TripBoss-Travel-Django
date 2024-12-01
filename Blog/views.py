@@ -31,7 +31,7 @@ def create_post(request):
                 path = f'images/{image.name}'  # Save the image with its original name
 
                 # Upload the file directly to Supabase (no need to wrap it in BytesIO)
-                response = supabase.storage.from_('your-bucket-name').upload(path, image)
+                response = supabase.storage.from_('media-files').upload(path, image)
 
                 # Check if there was an error in the upload
                 if response.get('error'):
@@ -39,7 +39,7 @@ def create_post(request):
                     return HttpResponse(f"Upload error: {response['error']['message']}")
 
                 # After a successful upload, save the file URL in the post model
-                post.image_url = f'{SUPABASE_URL}/storage/v1/object/public/your-bucket-name/{path}'
+                post.image_url = f'{SUPABASE_URL}/storage/v1/object/public/media-files/{path}'
 
             post.save()  # Save the post to the database
             return redirect('blog')  # Redirect to the list of blog posts
