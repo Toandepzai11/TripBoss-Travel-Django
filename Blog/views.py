@@ -3,8 +3,8 @@ from .models import Post
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
 from supabase import create_client
+from django.http import HttpResponse
 from io import BytesIO
-
 def post_list(request):
     posts = Post.objects.all()
     return render(request, 'blog/post_list.html', {'posts': posts})
@@ -34,16 +34,18 @@ def create_post(request):
                 # Define a path for the file in Supabase storage
                 path = f'images/{image.name}'  # Save the image with its original name
 
-                # Upload the file as bytes to Supabase
-                response = supabase.storage.from_('media-files').upload(path, image_bytes)
+                try:
+                    # Upload the file to Supabase storage
+                    response = supabase.storage.from_('media-files').upload(path, image_bytes)
 
-                # Check if there was an error in the upload
-                if response.get('error'):
-                    # Handle upload error
-                    return HttpResponse(f"Upload error: {response['error']['message']}")
+                    if response.get('error'):
+                        return HttpResponse(f"Upload error: {response['error']['message']}")
 
-                # After a successful upload, save the file URL in the post model
-                post.image_url = f'{SUPABASE_URL}/storage/v1/object/public/media-files/{path}'
+                    # If the upload is successful, generate the public URL
+                    post.image_url = f'{SUPABASE_URL}/storage/v1/object/public/media-files/{path}'
+
+                except Exception as e:
+                    return HttpResponse(f"Error uploading file to Supabase: {str(e)}")
 
             post.save()  # Save the post to the database
             return redirect('blog')  # Redirect to the list of blog posts
