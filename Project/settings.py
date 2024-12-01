@@ -12,15 +12,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-from supabase import create_client
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SUPABASE_URL = 'https://ltsatdtrtwnvkebvtchq.supabase.co'  # Example: 'https://yourproject.supabase.co'
-SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx0c2F0ZHRydHdudmtlYnZ0Y2hxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI5NTQwNjQsImV4cCI6MjA0ODUzMDA2NH0.A6IxQCXw7x6b4WR4jnlJO-Vui_Dv-T8BCjZVWZpmbEA'
 
-supabase = create_client(SUPABASE_URL, SUPABASE_API_KEY)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -28,7 +24,7 @@ supabase = create_client(SUPABASE_URL, SUPABASE_API_KEY)
 SECRET_KEY = "django-insecure-f%s$cx##j7(uu=&*vo25h*i3pi329+3z-im9hfnms=n(2hrhqk"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -133,7 +129,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-MEDIA_URL = f'{SUPABASE_URL}/storage/v1/object/public/media-files/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
