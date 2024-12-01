@@ -3,7 +3,6 @@ from .models import Post
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
 from supabase import create_client
-from io import BytesIO
 
 def post_list(request):
     posts = Post.objects.all()
